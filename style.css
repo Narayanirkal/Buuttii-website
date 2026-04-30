@@ -27,9 +27,11 @@ body {
 .bg-orange { background-color: var(--orange) !important; }
 .text-muted-white { color: var(--text-muted-white) !important; }
 .border-orange-3 { border: 3px solid var(--orange) !important; }
-.max-width-700 { max-width: 700px; }
-.max-width-500 { max-width: 500px; }
-.max-width-300 { max-width: 300px; }
+@media (min-width: 992px) {
+    .max-width-700 { max-width: 700px; }
+    .max-width-500 { max-width: 500px; }
+    .max-width-300 { max-width: 300px; }
+}
 .py-lg-10 { padding-top: 5rem !important; padding-bottom: 5rem !important; }
 .rounded-4 { border-radius: 1.5rem !important; }
 
@@ -123,7 +125,7 @@ body {
         padding-bottom: 3rem !important;
     }
     .hero-img-wrapper { 
-        margin-top: 2rem; 
+        margin-top: 1rem; 
     }
     .hero-img-wrapper::before {
         display: none;
