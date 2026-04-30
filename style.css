@@ -6,6 +6,11 @@
     --text-muted-white: rgba(255, 255, 255, 0.6);
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 body {
     font-family: 'Outfit', sans-serif;
     color: #333;
