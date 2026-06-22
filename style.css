@@ -169,3 +169,83 @@ body {
 .footer a:hover {
     color: var(--orange) !important;
 }
+
+/* App Download Badges & Section Styling */
+.app-badge-btn {
+    background-color: var(--primary);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #fff !important;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.2, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.app-badge-btn:hover {
+    background-color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 77, 0, 0.2);
+    border-color: var(--orange);
+}
+
+.app-badge-btn svg {
+    transition: transform 0.3s ease;
+}
+
+.app-badge-btn:hover svg {
+    transform: scale(1.1);
+}
+
+.app-badge-btn .badge-text {
+    line-height: 1.2;
+}
+
+.app-section {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #111111 0%, #1c1c1c 100%);
+    border-top: 4px solid var(--orange);
+    border-bottom: 4px solid var(--orange);
+}
+
+.app-mockup-wrapper {
+    position: relative;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+.app-mockup-wrapper::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: radial-gradient(circle, rgba(255, 77, 0, 0.15) 0%, transparent 70%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.app-mockup-img {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    height: auto;
+    transition: transform 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.app-mockup-img:hover {
+    transform: scale(1.03) rotate(-1deg);
+}
+
+@media (max-width: 991.98px) {
+    .app-section {
+        text-align: center;
+    }
+    .app-badge-btn {
+        margin: 0.5rem;
+    }
+}
+

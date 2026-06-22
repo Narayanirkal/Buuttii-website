@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Account | Buuttii</title>
+    <meta name="description" content="Request deletion of your Buuttii account and associated personal data. Learn what data is deleted and what may be retained.">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="image/logo.png">
+
+    <style>
+        /* Legal Page Custom CSS */
+        .page-header-bg {
+            background: linear-gradient(135deg, #111111 0%, #222222 100%);
+            border-bottom: 4px solid var(--orange);
+        }
+
+        .delete-content h2 {
+            font-weight: 700;
+            color: var(--primary);
+            border-left: 4px solid var(--orange);
+            padding-left: 15px;
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            font-size: 1.75rem;
+        }
+
+        .delete-content h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .delete-content p,
+        .delete-content li {
+            color: #555;
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .delete-content p {
+            margin-bottom: 1.25rem;
+        }
+
+        .delete-content ul {
+            padding-left: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .delete-content ul li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 0.5rem;
+        }
+
+        .delete-content ul li::marker {
+            color: var(--orange);
+        }
+
+        /* Email CTA Card */
+        .email-cta-card {
+            background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
+            border-radius: 1.25rem;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .email-cta-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .email-cta-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--orange);
+        }
+
+        .email-cta-card .email-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            font-size: 1.75rem;
+        }
+
+        .email-cta-card h4 {
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .email-cta-card .email-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .email-cta-card .email-link {
+            display: inline-block;
+            background: var(--orange);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 0.85rem 2.5rem;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            transition: background 0.25s ease, transform 0.25s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .email-cta-card .email-link:hover {
+            background: #e64500;
+            transform: scale(1.04);
+        }
+
+        .email-cta-card .email-subject-hint {
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        /* Info Cards */
+        .info-card {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            height: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .info-card .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .info-card .card-icon.deleted {
+            background: rgba(255, 77, 0, 0.1);
+            color: var(--orange);
+        }
+
+        .info-card .card-icon.retained {
+            background: rgba(17, 17, 17, 0.08);
+            color: var(--primary);
+        }
+
+        .info-card h5 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-card ul li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+            color: #555;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .info-card ul li:last-child {
+            border-bottom: none;
+        }
+
+        .info-card ul li .item-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .info-card ul li .item-dot.deleted {
+            background: var(--orange);
+        }
+
+        .info-card ul li .item-dot.retained {
+            background: var(--primary);
+        }
+
+        /* Timeline Badge */
+        .timeline-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 77, 0, 0.08);
+            color: var(--orange);
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0.6rem 1.25rem;
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 77, 0, 0.15);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom py-2">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="image/logo.png" alt="Buuttii Logo" height="60">
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-lg-4">
+                    <li class="nav-item"><a class="nav-link fw-medium" href="index.html#about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="index.html#mission">Our Mission</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="index.html#hero">Download App</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="index.html#contact">Contact</a></li>
+                    <li class="nav-item">
+                        <a class="btn btn-dark px-4 py-2 fw-semibold" href="index.html#contact">Get Started</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="page-header-bg py-5 text-center text-white position-relative overflow-hidden">
+        <div class="container position-relative z-1 py-4 py-lg-5">
+            <h1 class="display-3 fw-bold mb-2">Account Deletion</h1>
+            <p class="text-orange fw-semibold mb-0">Request Removal of Your Data</p>
+        </div>
+    </header>
+
+    <!-- Content Section -->
+    <main class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="p-4 p-md-5 bg-white border rounded-4 shadow-sm delete-content">
+
+                        <!-- Intro -->
+                        <p class="lead text-muted fs-5 mb-4">
+                            At Buuttii, we respect your right to control your personal data. If you wish to delete your account and all associated information, you can submit a request by following the simple process below.
+                        </p>
+
+                        <!-- Email CTA -->
+                        <div class="email-cta-card mb-5" id="request-deletion">
+                            <div class="email-icon">✉</div>
+                            <h4>Request Account Deletion</h4>
+                            <p class="email-subtitle">Send us an email and we'll take care of the rest.</p>
+                            <a href="mailto:contact@buuttii.com?subject=Account%20Deletion%20Request" class="email-link" id="email-cta-link">
+                                contact@buuttii.com
+                            </a>
+                            <p class="email-subject-hint">Subject: Account Deletion Request &bull; Include your registered mobile number</p>
+                        </div>
+
+                        <!-- Data Cards -->
+                        <h2 id="data-handling">What Happens to Your Data</h2>
+                        <p>When your deletion request is processed, we will permanently remove the following data from our systems. Certain records may be retained as required by law.</p>
+
+                        <div class="row g-4 mb-5">
+                            <div class="col-md-6">
+                                <div class="info-card" id="card-deleted">
+                                    <div class="card-icon deleted">🗑️</div>
+                                    <h5>What Will Be Deleted</h5>
+                                    <ul>
+                                        <li>
+                                            <span class="item-dot deleted"></span>
+                                            User profile information
+                                        </li>
+                                        <li>
+                                            <span class="item-dot deleted"></span>
+                                            Child profiles
+                                        </li>
+                                        <li>
+                                            <span class="item-dot deleted"></span>
+                                            Meal preferences
+                                        </li>
+                                        <li>
+                                            <span class="item-dot deleted"></span>
+                                            App account data
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-card" id="card-retained">
+                                    <div class="card-icon retained">🔒</div>
+                                    <h5>What May Be Retained</h5>
+                                    <ul>
+                                        <li>
+                                            <span class="item-dot retained"></span>
+                                            Payment and order records
+                                        </li>
+                                    </ul>
+                                    <p class="text-muted small mt-3 mb-0">
+                                        Retained only if required for legal, tax, fraud prevention, or compliance purposes.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Processing Time -->
+                        <h2 id="processing">Processing Timeline</h2>
+                        <p>
+                            Once we receive your request, our team will verify your identity and begin processing the deletion. You will receive a confirmation email once the process is complete.
+                        </p>
+                        <div class="mb-5">
+                            <span class="timeline-badge">
+                                ⏱ Typically processed within 7 business days
+                            </span>
+                        </div>
+
+                        <!-- How to Request -->
+                        <h2 id="how-to">How to Submit Your Request</h2>
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <div class="p-4 bg-light border rounded-3 h-100 shadow-sm">
+                                    <h5 class="fw-bold mb-3 text-orange">Option 1: Instant In-App Deletion (Recommended)</h5>
+                                    <p class="mb-3 text-muted">You can delete your account instantly from the Buuttii mobile application:</p>
+                                    <ol style="color: #555; line-height: 1.8; font-size: 0.95rem; padding-left: 1.25rem; margin-bottom: 0;">
+                                        <li>Open the <strong>Buuttii App</strong> on your device</li>
+                                        <li>Go to the <strong>Profile / Settings</strong> section</li>
+                                        <li>Tap on <strong>Delete Account</strong> and confirm the prompt</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-4 bg-light border rounded-3 h-100 shadow-sm">
+                                    <h5 class="fw-bold mb-3">Option 2: Deletion via Support Email</h5>
+                                    <p class="mb-3 text-muted">Alternatively, you can request manual account deletion from our support team:</p>
+                                    <ol style="color: #555; line-height: 1.8; font-size: 0.95rem; padding-left: 1.25rem; margin-bottom: 0;">
+                                        <li>Compose an email to <strong>contact@buuttii.com</strong></li>
+                                        <li>Set the subject line to <strong>"Account Deletion Request"</strong></li>
+                                        <li>Include your <strong>registered mobile number</strong> in the email body</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Questions -->
+                        <h2 id="questions">Have Questions?</h2>
+                        <p>
+                            If you have any questions about the deletion process or our data practices, please refer to our
+                            <a href="privacy.html" class="text-orange fw-semibold text-decoration-none">Privacy Policy</a>
+                            or contact us at
+                            <a href="mailto:contact@buuttii.com" class="text-orange fw-semibold text-decoration-none">contact@buuttii.com</a>.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-5 bg-white border-top">
+        <div class="container text-center">
+            <div class="mb-4">
+                <img src="image/logo.png" alt="Buuttii Logo" height="100">
+            </div>
+            <ul class="list-inline mb-4">
+                <li class="list-inline-item mx-2"><a href="privacy.html" class="text-muted text-decoration-none small">Privacy Policy</a></li>
+                <li class="list-inline-item mx-2"><a href="terms.html" class="text-muted text-decoration-none small">Terms of Service</a></li>
+                <li class="list-inline-item mx-2"><a href="delete-account.html" class="text-muted text-decoration-none small">Delete Account</a></li>
+                <li class="list-inline-item mx-2"><a href="index.html#hero" class="text-muted text-decoration-none small">Download App</a></li>
+                <li class="list-inline-item mx-2"><a href="index.html#contact" class="text-muted text-decoration-none small">Contact Info</a></li>
+            </ul>
+            <p class="text-muted smaller">&copy; 2026 Buuttii. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

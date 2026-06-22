@@ -30,6 +30,7 @@
                 <ul class="navbar-nav ms-auto align-items-center gap-lg-4">
                     <li class="nav-item"><a class="nav-link fw-medium" href="#about">About Us</a></li>
                     <li class="nav-item"><a class="nav-link fw-medium" href="#mission">Our Mission</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="#hero">Download App</a></li>
                     <li class="nav-item"><a class="nav-link fw-medium" href="#contact">Contact</a></li>
                     <li class="nav-item">
                         <a class="btn btn-dark px-4 py-2 fw-semibold" href="#contact">Get Started</a>
@@ -40,7 +41,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <header class="hero-section py-5 py-lg-10">
+    <header id="hero" class="hero-section py-5 py-lg-10">
         <div class="container">
             <div class="row align-items-center g-5 text-center text-lg-start">
                 <div class="col-lg-7">
@@ -57,9 +58,37 @@
                     </div>
                 </div>
                 <div class="col-lg-5">
-                    <div class="hero-img-wrapper">
-                        <img src="image/hero-tiffin.png" alt="Buuttii Authentic Indian Tiffin"
-                            class="img-fluid rounded-4 shadow-lg">
+                    <div class="text-center">
+                        <img src="image/app-mockup.png" alt="Buuttii Mobile App"
+                            class="img-fluid app-mockup-img" style="max-height: 450px;">
+                    </div>
+                    <!-- App Download Links below App Image -->
+                    <div class="mt-4 text-center">
+                        <div class="d-flex flex-wrap justify-content-center gap-2">
+                            <!-- Play Store Badge -->
+                            <a href="https://play.google.com/store/apps/details?id=com.buuttii.app" target="_blank" class="app-badge-btn px-3 py-2">
+                                <svg class="me-2" viewBox="0 0 512 512" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill="#00e5ff" d="M30 25.5c-4.4 4.5-7 11.6-7 20.3v420.3c0 8.7 2.6 15.8 7 20.3l3.5 3.5 242-242v-7.3L33.5 22L30 25.5z"/>
+                                    <path fill="#ffeb3b" d="M336.5 332.1l-64-64v-7.3l64-64 3.5 2 75.6 43c21.6 12.3 21.6 32.3 0 44.6l-75.1 45.7z"/>
+                                    <path fill="#ff2d55" d="M276 264.4l-242.5 242.5c7.2 2.3 16 1 25.1-4.2l217.4-124.3-64-64z"/>
+                                    <path fill="#00e676" d="M276 247.6l-64-64 217.4-124.3c-9.1-5.2-17.9-6.5-25.1-4.2L276 247.6z"/>
+                                </svg>
+                                <div class="badge-text text-start">
+                                    <small class="d-block text-uppercase text-muted-white" style="font-size: 0.55rem; letter-spacing: 0.5px;">Get it on</small>
+                                    <span class="d-block fw-bold text-white" style="font-size: 0.85rem;">Google Play</span>
+                                </div>
+                            </a>
+                            <!-- App Store Badge -->
+                            <a href="#" class="app-badge-btn px-3 py-2" onclick="alert('iOS App is coming soon! Please check back later or use our Android app.'); return false;">
+                                <svg class="me-2" viewBox="0 0 384 512" width="20" height="20" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 47.5-24.4 76.5 26.9 2.4 51.2-16 68.3-38.9z"/>
+                                </svg>
+                                <div class="badge-text text-start">
+                                    <small class="d-block text-uppercase text-muted-white" style="font-size: 0.55rem; letter-spacing: 0.5px;">Download on the</small>
+                                    <span class="d-block fw-bold text-white" style="font-size: 0.85rem;">App Store</span>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -71,7 +100,7 @@
         <div class="container">
             <div class="row align-items-center g-5">
                 <div class="col-lg-6 order-2 order-lg-1 text-center">
-                    <img src="image/about-tiffin.png" alt="Buuttii Fresh Tiffin Delivery" class="img-fluid rounded-4 shadow max-width-500 mx-auto d-block">
+                    <img src="image/hero-tiffin.png" alt="Buuttii Fresh Tiffin Delivery" class="img-fluid rounded-4 shadow max-width-500 mx-auto d-block">
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2">
                     <h2 class="display-4 fw-bold mb-4">Who is <span class="text-orange">Buuttii</span>?</h2>
@@ -152,6 +181,7 @@
                     <a href="#contact" class="btn btn-orange btn-lg px-5 py-3 fw-bold rounded-3">Enquire for Bulk Orders</a>
                 </div>
                 <div class="col-lg-5">
+                    <img src="image/about-tiffin.png" alt="Buuttii Catering Tiffins" class="img-fluid rounded-4 shadow mb-4 mx-auto d-block">
                     <div class="p-4 bg-light border rounded-4 shadow-sm">
                         <h4 class="fw-bold mb-3">Scale with Confidence</h4>
                         <p class="text-muted mb-0">From small team lunches to large community gatherings, we deliver professional-grade nutrition with the same care and quality as our daily subscription service.</p>
@@ -218,6 +248,8 @@
         </div>
     </section>
 
+
+
     <!-- Contact Section (Refined for Meta Verification) -->
     <section id="contact" class="py-5 py-lg-10 bg-dark text-white">
         <div class="container text-center text-lg-start">
@@ -235,8 +267,7 @@
                                 <div class="mb-4">
                                     <h6 class="text-orange fw-bold text-uppercase ls-1 small mb-2">Office Address</h6>
                                     <p class="mb-0 fw-medium">Hubli-Dharwad, Karnataka, India<br><span
-                                            class="text-muted fw-normal">(Please add your specific business
-                                            address)</span></p>
+                                            class="text-muted fw-normal"></span></p>
                                 </div>
                                 <hr class="my-4">
                                 <div class="mb-4">
@@ -263,63 +294,16 @@
                 <img src="image/logo.png" alt="Buuttii Logo" height="100">
             </div>
             <ul class="list-inline mb-4">
-                <li class="list-inline-item mx-2"><a href="#" class="text-muted text-decoration-none small"
-                        data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a></li>
-                <li class="list-inline-item mx-2"><a href="#" class="text-muted text-decoration-none small"
-                        data-bs-toggle="modal" data-bs-target="#termsModal">Terms & Conditions</a></li>
+                <li class="list-inline-item mx-2"><a href="privacy.html" class="text-muted text-decoration-none small">Privacy Policy</a></li>
+                <li class="list-inline-item mx-2"><a href="terms.html" class="text-muted text-decoration-none small">Terms of Service</a></li>
+                <li class="list-inline-item mx-2"><a href="delete-account.html" class="text-muted text-decoration-none small">Delete Account</a></li>
+                <li class="list-inline-item mx-2"><a href="#hero" class="text-muted text-decoration-none small">Download App</a></li>
                 <li class="list-inline-item mx-2"><a href="#contact"
                         class="text-muted text-decoration-none small">Contact Info</a></li>
             </ul>
             <p class="text-muted smaller">&copy; 2026 Buuttii. All rights reserved.</p>
         </div>
     </footer>
-
-    <!-- Privacy Modal -->
-    <div class="modal fade" id="privacyModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content rounded-4 border-0 shadow">
-                <div class="modal-header border-0 p-4 pb-0">
-                    <h3 class="fw-bold mb-0">Privacy Policy</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <p class="text-muted small mb-4">Last Updated: April 30, 2026</p>
-                    <h5>1. Information We Collect</h5>
-                    <p>We may collect personal information such as your name, email, and phone number when you inquire
-                        about our services.</p>
-                    <h5>2. Communication</h5>
-                    <p>We may use your contact information to send you updates about your subscription and service
-                        announcements.</p>
-                    <h5>3. Data Security</h5>
-                    <p>We implement industry-standard security measures to protect your data from unauthorized access.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Terms Modal -->
-    <div class="modal fade" id="termsModal" tabindex="-1">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content rounded-4 border-0 shadow">
-                <div class="modal-header border-0 p-4 pb-0">
-                    <h3 class="fw-bold mb-0">Terms & Conditions</h3>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4">
-                    <p class="text-muted small mb-4">Last Updated: April 30, 2026</p>
-                    <h5>1. Service Overview</h5>
-                    <p>Buuttii provides a meal subscription service for individuals and businesses in Hubli, Karnataka.
-                    </p>
-                    <h5>2. Communication Policy</h5>
-                    <p>By using our service, you agree to receive service-related communications regarding your
-                        subscription via email or phone.</p>
-                    <h5>3. Governing Law</h5>
-                    <p>These terms are governed by the laws of India and the state of Karnataka.</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
