@@ -63,30 +63,15 @@
             color: var(--orange);
         }
 
-        /* Email CTA Card */
+        /* Email CTA Panel */
         .email-cta-card {
-            background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
-            border-radius: 1.25rem;
+            background: var(--primary);
+            border-radius: 1rem;
             padding: 2.5rem;
             text-align: center;
             position: relative;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .email-cta-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        .email-cta-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--orange);
+            border-top: 4px solid var(--orange);
         }
 
         .email-cta-card .email-icon {
@@ -122,13 +107,12 @@
             padding: 0.85rem 2.5rem;
             border-radius: 0.75rem;
             text-decoration: none;
-            transition: background 0.25s ease, transform 0.25s ease;
+            transition: background 0.25s ease;
             letter-spacing: 0.5px;
         }
 
         .email-cta-card .email-link:hover {
             background: #e64500;
-            transform: scale(1.04);
         }
 
         .email-cta-card .email-subject-hint {
@@ -137,19 +121,13 @@
             margin-top: 1rem;
         }
 
-        /* Info Cards */
+        /* Info Panels */
         .info-card {
-            background: #fff;
+            background: #ffffff;
             border: 1px solid var(--border);
-            border-radius: 1.25rem;
+            border-radius: 1rem;
             padding: 2rem;
             height: 100%;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .info-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
         }
 
         .info-card .card-icon {
@@ -164,12 +142,12 @@
         }
 
         .info-card .card-icon.deleted {
-            background: rgba(255, 77, 0, 0.1);
+            background: rgba(255, 77, 0, 0.08);
             color: var(--orange);
         }
 
         .info-card .card-icon.retained {
-            background: rgba(17, 17, 17, 0.08);
+            background: rgba(17, 17, 17, 0.05);
             color: var(--primary);
         }
 
@@ -262,12 +240,11 @@
         </div>
     </header>
 
-    <!-- Content Section -->
-    <main class="py-5 bg-light">
+    <main class="py-5 bg-white">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <div class="p-4 p-md-5 bg-white border rounded-4 shadow-sm delete-content">
+                    <div class="delete-content">
 
                         <!-- Intro -->
                         <p class="lead text-muted fs-5 mb-4">
@@ -346,7 +323,7 @@
                         <h2 id="how-to">How to Submit Your Request</h2>
                         <div class="row g-4 mb-4">
                             <div class="col-md-6">
-                                <div class="p-4 bg-light border rounded-3 h-100 shadow-sm">
+                                <div class="p-4 bg-light border rounded-3 h-100">
                                     <h5 class="fw-bold mb-3 text-orange">Option 1: Instant In-App Deletion (Recommended)</h5>
                                     <p class="mb-3 text-muted">You can delete your account instantly from the Buuttii mobile application:</p>
                                     <ol style="color: #555; line-height: 1.8; font-size: 0.95rem; padding-left: 1.25rem; margin-bottom: 0;">
@@ -357,7 +334,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="p-4 bg-light border rounded-3 h-100 shadow-sm">
+                                <div class="p-4 bg-light border rounded-3 h-100">
                                     <h5 class="fw-bold mb-3">Option 2: Deletion via Support Email</h5>
                                     <p class="mb-3 text-muted">Alternatively, you can request manual account deletion from our support team:</p>
                                     <ol style="color: #555; line-height: 1.8; font-size: 0.95rem; padding-left: 1.25rem; margin-bottom: 0;">

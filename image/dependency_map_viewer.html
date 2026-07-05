@@ -1,0 +1,502 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+#app { display: flex; flex-direction: column; height: 700px; background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
+#toolbar { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-bottom: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); flex-wrap: wrap; }
+#toolbar input[type=text] { flex: 1; min-width: 140px; font-size: 13px; padding: 5px 10px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-primary); outline: none; }
+#toolbar input[type=text]:focus { border-color: var(--color-border-primary); }
+.filter-btn { font-size: 12px; padding: 4px 10px; border-radius: 20px; border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-secondary); cursor: pointer; white-space: nowrap; transition: all .15s; }
+.filter-btn.active { background: var(--color-background-info); color: var(--color-text-info); border-color: transparent; }
+#zoom-btns { display: flex; gap: 4px; margin-left: auto; }
+.zoom-btn { width: 28px; height: 28px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-primary); cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; }
+.zoom-btn:hover { background: var(--color-background-secondary); }
+#canvas-wrap { flex: 1; position: relative; overflow: hidden; cursor: grab; }
+#canvas-wrap.dragging { cursor: grabbing; }
+canvas { position: absolute; top: 0; left: 0; }
+#tooltip { position: absolute; background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 8px 12px; font-size: 12px; color: var(--color-text-primary); pointer-events: none; display: none; max-width: 280px; line-height: 1.5; z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+#legend { display: flex; gap: 12px; padding: 8px 14px; border-top: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); flex-wrap: wrap; }
+.leg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--color-text-secondary); }
+.leg-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+#info-bar { padding: 4px 14px; font-size: 11px; color: var(--color-text-tertiary); border-top: 0.5px solid var(--color-border-tertiary); background: var(--color-background-secondary); }
+</style>
+
+<div id="app">
+  <div id="toolbar">
+    <input type="text" id="search" placeholder="Search nodes…">
+    <button class="filter-btn active" data-cat="all">All</button>
+    <button class="filter-btn" data-cat="server">Entry</button>
+    <button class="filter-btn" data-cat="route">Routes</button>
+    <button class="filter-btn" data-cat="controller">Controllers</button>
+    <button class="filter-btn" data-cat="service">Services</button>
+    <button class="filter-btn" data-cat="validator">Validators</button>
+    <button class="filter-btn" data-cat="db">DB/Infra</button>
+    <button class="filter-btn" data-cat="flutter">Flutter</button>
+    <button class="filter-btn" data-cat="react">React</button>
+    <div id="zoom-btns">
+      <button class="zoom-btn" id="zin">+</button>
+      <button class="zoom-btn" id="zout">−</button>
+      <button class="zoom-btn" id="zreset" title="Reset view" style="font-size:12px">⟳</button>
+    </div>
+  </div>
+  <div id="canvas-wrap">
+    <canvas id="c"></canvas>
+    <div id="tooltip"></div>
+  </div>
+  <div id="legend">
+    <div class="leg"><div class="leg-dot" style="background:#185FA5"></div>Entry/Server</div>
+    <div class="leg"><div class="leg-dot" style="background:#0F6E56"></div>Routes</div>
+    <div class="leg"><div class="leg-dot" style="background:#534AB7"></div>Controllers</div>
+    <div class="leg"><div class="leg-dot" style="background:#993C1D"></div>Services</div>
+    <div class="leg"><div class="leg-dot" style="background:#BA7517"></div>Validators</div>
+    <div class="leg"><div class="leg-dot" style="background:#5F5E5A"></div>DB/Middleware</div>
+    <div class="leg"><div class="leg-dot" style="background:#993556"></div>Flutter</div>
+    <div class="leg"><div class="leg-dot" style="background:#3B6D11"></div>React</div>
+  </div>
+  <div id="info-bar" id="info">Click a node to highlight its connections. Drag to pan. Scroll to zoom.</div>
+</div>
+
+<script>
+const rawEdges = [
+["server.js","db"],["server.js","commonAuthMiddleware"],["server.js","clientAuthRoutes"],["server.js","adminAuthRoutes"],
+["server.js","childRoutes"],["server.js","parentRoutes"],["server.js","teacherRoutes"],["server.js","professionalRoutes"],
+["server.js","commonProfileRoutes"],["server.js","clientAdminRoutes"],["server.js","commonCorpRoutes"],["server.js","adminCorpRoutes"],
+["server.js","adminSchoolRoutes"],["server.js","adminMasterDataRoutes"],["server.js","adminMasterDataReadRoutes"],
+["server.js","adminMenuRoutes"],["server.js","commonMenuRoutes"],["server.js","clientMealRoutes"],["server.js","clientMenuNutritionRoutes"],
+["server.js","adminMealRoutes"],["server.js","adminMealSizeUpgradeRoutes"],["server.js","adminMenuNutritionRoutes"],
+["server.js","clientCartRoutes"],["server.js","clientSubscriptionRoutes"],["server.js","commonSubscriptionRoutes"],
+["server.js","clientPaymentRoutes"],["server.js","clientWalletRoutes"],["server.js","clientBulkOrderRoutes"],
+["server.js","commonBulkOrderConfigRoutes"],["server.js","adminBulkOrderRoutes"],
+["clientAuthRoutes","clientAuthController"],["clientAuthRoutes","clientAuthValidator"],["clientAuthRoutes","clientAuthMiddleware"],
+["adminAuthRoutes","adminAuthController"],["adminAuthRoutes","adminAuthValidator"],["adminAuthRoutes","adminAuthMiddleware"],
+["childRoutes","childController"],["childRoutes","childValidator"],
+["parentRoutes","parentController"],["parentRoutes","profileValidator"],
+["teacherRoutes","teacherController"],["teacherRoutes","profileValidator"],
+["professionalRoutes","professionalController"],["professionalRoutes","profileValidator"],
+["commonProfileRoutes","commonProfileController"],["clientAdminRoutes","clientAdminController"],
+["commonCorpRoutes","commonCorpController"],["adminCorpRoutes","adminCorpController"],["adminCorpRoutes","adminCorpValidator"],
+["adminSchoolRoutes","adminSchoolController"],["adminSchoolRoutes","adminSchoolValidator"],
+["adminMasterDataRoutes","adminMasterDataController"],["adminMasterDataRoutes","adminMasterDataValidator"],
+["adminMasterDataReadRoutes","adminMasterDataReadController"],
+["adminMenuRoutes","adminMenuController"],["adminMenuRoutes","adminMenuValidator"],
+["commonMenuRoutes","commonMenuController"],
+["clientMenuNutritionRoutes","clientMenuNutritionController"],["adminMenuNutritionRoutes","adminMenuNutritionController"],
+["adminMealRoutes","adminMealController"],["adminMealSizeUpgradeRoutes","adminMealSizeUpgradeController"],
+["clientMealRoutes","clientMealController"],
+["clientCartRoutes","cartController"],["clientCartRoutes","cartValidator"],
+["clientSubscriptionRoutes","clientSubController"],["commonSubscriptionRoutes","commonSubController"],
+["clientPaymentRoutes","paymentController"],["clientPaymentRoutes","paymentValidator"],
+["clientWalletRoutes","walletController"],
+["clientBulkOrderRoutes","bulkOrderController"],["clientBulkOrderRoutes","bulkOrderValidator"],
+["commonBulkOrderConfigRoutes","bulkOrderConfigController"],
+["adminBulkOrderRoutes","bulkOrderConfigAdminController"],["adminBulkOrderRoutes","bulkOrderListAdminController"],
+["adminBulkOrderRoutes","bulkVarietyMealAdminController"],["adminBulkOrderRoutes","bulkVarietyCategoryAdminController"],
+["adminBulkOrderRoutes","bulkOrderAdminValidator"],
+["clientAuthController","db"],["clientAuthController","otpService"],
+["adminAuthController","db"],["adminAuthController","otpService"],
+["childController","db"],["parentController","db"],["teacherController","db"],["professionalController","db"],
+["commonProfileController","db"],["clientAdminController","db"],
+["commonCorpController","db"],["adminCorpController","db"],["adminSchoolController","db"],
+["adminMasterDataController","db"],["adminMasterDataReadController","db"],
+["adminMenuController","db"],["commonMenuController","db"],["clientMenuNutritionController","db"],
+["adminMenuNutritionController","db"],["adminMealController","db"],
+["adminMealController","mealEligibilityService"],["adminMealController","tokenController"],
+["adminMealSizeUpgradeController","db"],["clientMealController","db"],
+["clientMealController","mealEligibilityService"],["clientMealController","clientMenuNutritionController"],
+["cartController","db"],["cartController","cartService"],
+["clientSubController","db"],["commonSubController","db"],
+["paymentController","db"],["paymentController","walletService"],["paymentController","walletPaymentService"],
+["walletController","walletService"],["walletController","walletPaymentService"],
+["walletService","db"],["walletPaymentService","walletService"],
+["bulkOrderController","bulkOrderService"],["bulkOrderConfigController","bulkOrderService"],
+["bulkOrderConfigAdminController","bulkOrderService"],["bulkOrderListAdminController","db"],
+["bulkVarietyMealAdminController","bulkOrderService"],["bulkVarietyCategoryAdminController","bulkOrderService"],
+["bulkOrderService","db"],
+["App.jsx","AuthContext"],["AuthContext","api.js"],
+["api.js","adminAuthRoutes"],
+["BulkOrderCategories.jsx","api.js"],["BulkOrderMeals.jsx","api.js"],["BulkOrderOrders.jsx","api.js"],["BulkOrderSettings.jsx","api.js"],
+["BulkOrderCategories.jsx","adminBulkOrderRoutes"],["BulkOrderMeals.jsx","adminBulkOrderRoutes"],
+["BulkOrderOrders.jsx","adminBulkOrderRoutes"],["BulkOrderSettings.jsx","adminBulkOrderRoutes"],
+["Schools.jsx","api.js"],["CorporateLocations.jsx","api.js"],["MasterData.jsx","api.js"],["Lookup.jsx","api.js"],
+["Menu.jsx","api.js"],["MealSizeUpgrades.jsx","api.js"],
+["Schools.jsx","adminSchoolRoutes"],["CorporateLocations.jsx","adminCorpRoutes"],
+["MasterData.jsx","adminMasterDataRoutes"],["Lookup.jsx","adminMasterDataRoutes"],
+["Menu.jsx","adminMenuRoutes"],["Menu.jsx","adminMenuNutritionRoutes"],
+["MealSizeUpgrades.jsx","adminMealSizeUpgradeRoutes"],
+["main.dart","session_provider"],["main.dart","dio_client"],
+["dio_client","session_provider"],["dio_client","api_endpoints"],
+["main.dart","children_provider"],["main.dart","profile_provider"],
+["children_provider","children_repository"],["profile_provider","profile_repository"],
+["children_management_screen","children_provider"],
+["profile_details_screen","auth_provider"],
+["professional_profile_screen","profile_provider"],["teacher_profile_screen","profile_provider"],
+["children_repository","childRoutes"],["profile_repository","parentRoutes"],
+["profile_repository","teacherRoutes"],["profile_repository","professionalRoutes"],
+["profile_repository","commonProfileRoutes"],
+["main.dart","lookup_provider"],["lookup_provider","lookup_repository"],
+["lookup_repository","adminMasterDataRoutes"],["lookup_repository","commonCorpRoutes"],["lookup_repository","adminSchoolRoutes"],
+["main.dart","menu_provider"],["menu_provider","dio_client"],
+["weekly_menu_screen","menu_provider"],
+["menu_provider","clientMealRoutes"],["menu_provider","clientMenuNutritionRoutes"],
+["main.dart","cart_provider"],["main.dart","subscription_provider"],["main.dart","payment_provider"],
+["cart_provider","cart_repository"],["subscription_provider","subscription_repository"],["payment_provider","payment_repository"],
+["cart_repository","clientCartRoutes"],["subscription_repository","commonSubscriptionRoutes"],["payment_repository","clientPaymentRoutes"],
+["main.dart","bulk_order_provider"],["bulk_order_provider","bulk_order_repository"],
+["bulk_order_repository","clientBulkOrderRoutes"],["bulk_order_repository","commonBulkOrderConfigRoutes"],
+];
+
+function getCategory(id) {
+  if (id === 'server.js') return 'server';
+  if (id === 'db' || id.includes('Middleware') || id.includes('middleware') || id.includes('commonAuth') || id.includes('api_endpoints') || id.includes('session_provider') || id.includes('auth_provider') || id.includes('AuthContext') || id.includes('api.js')) return 'db';
+  if (id.endsWith('Routes') || id.endsWith('routes')) return 'route';
+  if (id.includes('Controller') || id.includes('controller')) return 'controller';
+  if (id.includes('Service') || id.includes('service') || id.includes('cartService') || id.includes('walletService') || id.includes('bulkOrderService') || id.includes('otpService') || id.includes('mealEligibility')) return 'service';
+  if (id.includes('Validator') || id.includes('validator')) return 'validator';
+  if (id.endsWith('.dart') || id.includes('_provider') || id.includes('_repository') || id.includes('_screen') || id.includes('dio_client') || id.includes('main.dart')) return 'flutter';
+  if (id.endsWith('.jsx') || id.endsWith('.js') && !id.includes('server')) return 'react';
+  return 'db';
+}
+
+const COLORS = {
+  server:     { fill:'#185FA5', text:'#fff', stroke:'#0C447C' },
+  route:      { fill:'#0F6E56', text:'#fff', stroke:'#085041' },
+  controller: { fill:'#534AB7', text:'#fff', stroke:'#3C3489' },
+  service:    { fill:'#993C1D', text:'#fff', stroke:'#712B13' },
+  validator:  { fill:'#BA7517', text:'#fff', stroke:'#854F0B' },
+  db:         { fill:'#5F5E5A', text:'#fff', stroke:'#444441' },
+  flutter:    { fill:'#993556', text:'#fff', stroke:'#72243E' },
+  react:      { fill:'#3B6D11', text:'#fff', stroke:'#27500A' },
+};
+
+// Build graph
+const nodeMap = {};
+const allNodes = [];
+const allEdges = [];
+
+rawEdges.forEach(([s,t]) => {
+  [s,t].forEach(id => {
+    if (!nodeMap[id]) {
+      const n = { id, cat: getCategory(id), x: 0, y: 0, vx: 0, vy: 0, w: 0, h: 24, neighbors: new Set() };
+      nodeMap[id] = n;
+      allNodes.push(n);
+    }
+  });
+  nodeMap[s].neighbors.add(t);
+  nodeMap[t].neighbors.add(s);
+  allEdges.push({ s, t });
+});
+
+// Layout with force-directed simulation
+const W = 2200, H = 1800;
+allNodes.forEach(n => { n.x = Math.random()*W; n.y = Math.random()*H; });
+
+// Group by category for initial placement
+const cats = ['server','route','controller','service','validator','db','flutter','react'];
+const zones = {
+  server:     {cx:W*0.5,  cy:H*0.08},
+  route:      {cx:W*0.5,  cy:H*0.22},
+  controller: {cx:W*0.5,  cy:H*0.42},
+  service:    {cx:W*0.75, cy:H*0.6},
+  validator:  {cx:W*0.25, cy:H*0.62},
+  db:         {cx:W*0.5,  cy:H*0.78},
+  flutter:    {cx:W*0.25, cy:H*0.38},
+  react:      {cx:W*0.75, cy:H*0.25},
+};
+
+allNodes.forEach(n => {
+  const z = zones[n.cat];
+  n.x = z.cx + (Math.random()-.5)*400;
+  n.y = z.cy + (Math.random()-.5)*300;
+});
+
+// Force simulation
+function runSim(iters=300) {
+  for (let i=0; i<iters; i++) {
+    const k = 0.03;
+    allEdges.forEach(({s,t}) => {
+      const a=nodeMap[s], b=nodeMap[t];
+      const dx=b.x-a.x, dy=b.y-a.y;
+      const dist=Math.sqrt(dx*dx+dy*dy)||1;
+      const ideal=160;
+      const f=(dist-ideal)*k;
+      const fx=dx/dist*f, fy=dy/dist*f;
+      a.vx+=fx; a.vy+=fy; b.vx-=fx; b.vy-=fy;
+    });
+    // Repulsion
+    for(let a=0;a<allNodes.length;a++) {
+      for(let b=a+1;b<allNodes.length;b++) {
+        const na=allNodes[a],nb=allNodes[b];
+        const dx=nb.x-na.x,dy=nb.y-na.y;
+        const dist=Math.sqrt(dx*dx+dy*dy)||1;
+        if(dist<200) {
+          const f=200/dist*0.8;
+          const fx=dx/dist*f,fy=dy/dist*f;
+          na.vx-=fx;na.vy-=fy;nb.vx+=fx;nb.vy+=fy;
+        }
+      }
+    }
+    // Zone attraction
+    allNodes.forEach(n=>{
+      const z=zones[n.cat];
+      n.vx+=(z.cx-n.x)*0.008;
+      n.vy+=(z.cy-n.y)*0.008;
+    });
+    allNodes.forEach(n=>{
+      n.vx*=0.85;n.vy*=0.85;
+      n.x+=n.vx;n.y+=n.vy;
+      n.x=Math.max(60,Math.min(W-60,n.x));
+      n.y=Math.max(60,Math.min(H-60,n.y));
+    });
+  }
+}
+runSim(400);
+
+// Canvas setup
+const wrap = document.getElementById('canvas-wrap');
+const cvs = document.getElementById('c');
+const ctx = cvs.getContext('2d');
+const TIP = document.getElementById('tooltip');
+
+let vw,vh;
+function resize() {
+  vw=wrap.clientWidth; vh=wrap.clientHeight;
+  cvs.width=vw; cvs.height=vh;
+  draw();
+}
+
+// View transform
+let tx=0,ty=0,scale=1;
+function fitAll() {
+  let minx=Infinity,miny=Infinity,maxx=-Infinity,maxy=-Infinity;
+  allNodes.forEach(n=>{minx=Math.min(minx,n.x);miny=Math.min(miny,n.y);maxx=Math.max(maxx,n.x);maxy=Math.max(maxy,n.y);});
+  const pad=80;
+  const sc=Math.min((vw-pad*2)/(maxx-minx),(vh-pad*2)/(maxy-miny),1.2);
+  scale=sc;
+  tx=vw/2-((minx+maxx)/2)*scale;
+  ty=vh/2-((miny+maxy)/2)*scale;
+}
+
+function worldToScreen(wx,wy){ return [wx*scale+tx, wy*scale+ty]; }
+function screenToWorld(sx,sy){ return [(sx-tx)/scale,(sy-ty)/scale]; }
+
+// Node sizing
+const font = '11px sans-serif';
+allNodes.forEach(n=>{
+  const c=document.createElement('canvas').getContext('2d');
+  c.font=font;
+  const lbl=shortLabel(n.id);
+  n.w=Math.max(c.measureText(lbl).width+16, 60);
+  n.lbl=lbl;
+  n.h=22;
+});
+
+function shortLabel(id) {
+  return id.replace('src/','').replace('lib/','').replace('features/','').replace('core/','')
+    .replace(/.*\//,'').replace('.js','').replace('.jsx','').replace('.dart','');
+}
+
+// Selected / filter state
+let selectedNode=null;
+let activeFilter='all';
+let searchStr='';
+
+function isVisible(n) {
+  if (activeFilter!=='all' && n.cat!==activeFilter) return false;
+  if (searchStr && !n.id.toLowerCase().includes(searchStr)) return false;
+  return true;
+}
+
+function draw() {
+  ctx.clearRect(0,0,vw,vh);
+  ctx.save();
+  
+  // Edges
+  allEdges.forEach(({s,t})=>{
+    const a=nodeMap[s],b=nodeMap[t];
+    const av=isVisible(a),bv=isVisible(b);
+    if(!av&&!bv) return;
+    const [ax,ay]=worldToScreen(a.x,a.y);
+    const [bx,by]=worldToScreen(b.x,b.y);
+    
+    let alpha=0.13;
+    if(selectedNode) {
+      if((s===selectedNode||t===selectedNode)&&av&&bv) alpha=0.85;
+      else alpha=0.03;
+    } else if(!av||!bv) alpha=0.04;
+    
+    ctx.beginPath();
+    ctx.moveTo(ax,ay);
+    ctx.lineTo(bx,by);
+    ctx.strokeStyle=`rgba(150,150,150,${alpha})`;
+    ctx.lineWidth=selectedNode&&(s===selectedNode||t===selectedNode)?1.5:0.7;
+    ctx.stroke();
+    
+    // Arrow
+    if(alpha>0.1) {
+      const ang=Math.atan2(by-ay,bx-ax);
+      const n2=nodeMap[t];
+      const [ex,ey]=worldToScreen(n2.x,n2.y);
+      const nx=Math.cos(ang),ny=Math.sin(ang);
+      const r=(n2.w/2+4)*scale;
+      const px=ex-nx*r,py=ey-ny*r;
+      const al=8*Math.min(scale,1),aw=4*Math.min(scale,1);
+      ctx.beginPath();
+      ctx.moveTo(px,py);
+      ctx.lineTo(px-nx*al+ny*aw,py-ny*al-nx*aw);
+      ctx.lineTo(px-nx*al-ny*aw,py-ny*al+nx*aw);
+      ctx.closePath();
+      ctx.fillStyle=`rgba(120,120,120,${alpha})`;
+      ctx.fill();
+    }
+  });
+  
+  // Nodes
+  ctx.font=`${Math.max(9,11*scale)}px sans-serif`;
+  allNodes.forEach(n=>{
+    if(!isVisible(n)) return;
+    const [sx,sy]=worldToScreen(n.x,n.y);
+    const sw=n.w*scale,sh=n.h*scale;
+    const col=COLORS[n.cat];
+    
+    let alpha=1;
+    if(selectedNode && selectedNode!==n.id && !nodeMap[selectedNode].neighbors.has(n.id)) alpha=0.2;
+    
+    ctx.globalAlpha=alpha;
+    
+    // Node rect
+    ctx.beginPath();
+    const rx=4*scale;
+    ctx.roundRect(sx-sw/2,sy-sh/2,sw,sh,rx);
+    ctx.fillStyle=selectedNode===n.id?col.stroke:col.fill;
+    ctx.fill();
+    
+    // Label
+    if(scale>0.25) {
+      ctx.fillStyle=col.text;
+      ctx.textAlign='center';
+      ctx.textBaseline='middle';
+      ctx.fillText(n.lbl,sx,sy);
+    }
+    
+    ctx.globalAlpha=1;
+  });
+  
+  ctx.restore();
+}
+
+// Interaction
+let drag=false,lastX=0,lastY=0;
+wrap.addEventListener('mousedown',e=>{drag=true;lastX=e.clientX;lastY=e.clientY;wrap.classList.add('dragging');});
+window.addEventListener('mousemove',e=>{
+  if(drag){tx+=e.clientX-lastX;ty+=e.clientY-lastY;lastX=e.clientX;lastY=e.clientY;draw();}
+  else {
+    const r=wrap.getBoundingClientRect();
+    const [wx,wy]=screenToWorld(e.clientX-r.left,e.clientY-r.top);
+    let hit=null;
+    allNodes.forEach(n=>{if(!isVisible(n))return;if(Math.abs(wx-n.x)<n.w/2&&Math.abs(wy-n.y)<n.h/2)hit=n;});
+    if(hit){
+      TIP.style.display='block';
+      TIP.style.left=(e.clientX-r.left+12)+'px';
+      TIP.style.top=(e.clientY-r.top+12)+'px';
+      const deg=hit.neighbors.size;
+      TIP.innerHTML=`<strong>${hit.id}</strong><br><span style="color:var(--color-text-secondary)">${hit.cat} · ${deg} connection${deg!==1?'s':''}</span>`;
+      wrap.style.cursor='pointer';
+    } else {
+      TIP.style.display='none';
+      if(!drag)wrap.style.cursor='grab';
+    }
+  }
+});
+window.addEventListener('mouseup',()=>{drag=false;wrap.classList.remove('dragging');});
+
+wrap.addEventListener('click',e=>{
+  if(Math.abs(e.movementX)+Math.abs(e.movementY)>3)return;
+  const r=wrap.getBoundingClientRect();
+  const [wx,wy]=screenToWorld(e.clientX-r.left,e.clientY-r.top);
+  let hit=null;
+  allNodes.forEach(n=>{if(!isVisible(n))return;if(Math.abs(wx-n.x)<n.w/2&&Math.abs(wy-n.y)<n.h/2)hit=n;});
+  if(hit){
+    selectedNode = selectedNode===hit.id?null:hit.id;
+    const infoBar=document.getElementById('info-bar');
+    if(selectedNode){
+      const nb=Array.from(nodeMap[selectedNode].neighbors).slice(0,6).join(', ');
+      infoBar.textContent=`${selectedNode} → ${nb}${nodeMap[selectedNode].neighbors.size>6?'…':''}`;
+    } else {
+      infoBar.textContent='Click a node to highlight its connections. Drag to pan. Scroll to zoom.';
+    }
+    draw();
+  } else {
+    selectedNode=null;
+    document.getElementById('info-bar').textContent='Click a node to highlight its connections. Drag to pan. Scroll to zoom.';
+    draw();
+  }
+});
+
+wrap.addEventListener('wheel',e=>{
+  e.preventDefault();
+  const r=wrap.getBoundingClientRect();
+  const mx=e.clientX-r.left,my=e.clientY-r.top;
+  const factor=e.deltaY<0?1.12:0.9;
+  tx=(tx-mx)*factor+mx;
+  ty=(ty-my)*factor+my;
+  scale*=factor;
+  scale=Math.max(0.1,Math.min(5,scale));
+  draw();
+},{passive:false});
+
+// Touch support
+let lastDist=0,lastTX=0,lastTY=0,touching=false;
+wrap.addEventListener('touchstart',e=>{
+  touching=true;
+  if(e.touches.length===1){lastTX=e.touches[0].clientX;lastTY=e.touches[0].clientY;}
+  else if(e.touches.length===2){
+    const dx=e.touches[1].clientX-e.touches[0].clientX,dy=e.touches[1].clientY-e.touches[0].clientY;
+    lastDist=Math.sqrt(dx*dx+dy*dy);
+  }
+},{passive:true});
+wrap.addEventListener('touchmove',e=>{
+  e.preventDefault();
+  if(e.touches.length===1){
+    tx+=e.touches[0].clientX-lastTX;ty+=e.touches[0].clientY-lastTY;
+    lastTX=e.touches[0].clientX;lastTY=e.touches[0].clientY;draw();
+  } else if(e.touches.length===2){
+    const dx=e.touches[1].clientX-e.touches[0].clientX,dy=e.touches[1].clientY-e.touches[0].clientY;
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    const f=dist/lastDist;
+    const mx=(e.touches[0].clientX+e.touches[1].clientX)/2;
+    const my=(e.touches[0].clientY+e.touches[1].clientY)/2;
+    const r=wrap.getBoundingClientRect();
+    const cx=mx-r.left,cy=my-r.top;
+    tx=(tx-cx)*f+cx;ty=(ty-cy)*f+cy;scale*=f;scale=Math.max(0.1,Math.min(5,scale));
+    lastDist=dist;draw();
+  }
+},{passive:false});
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter=btn.dataset.cat;
+    selectedNode=null;
+    draw();
+  });
+});
+
+// Search
+document.getElementById('search').addEventListener('input',e=>{
+  searchStr=e.target.value.toLowerCase();
+  selectedNode=null;
+  draw();
+});
+
+// Zoom buttons
+document.getElementById('zin').addEventListener('click',()=>{scale=Math.min(5,scale*1.25);tx=vw/2-(vw/2-tx)*1.25;ty=vh/2-(vh/2-ty)*1.25;draw();});
+document.getElementById('zout').addEventListener('click',()=>{scale=Math.max(0.1,scale/1.25);tx=vw/2-(vw/2-tx)/1.25;ty=vh/2-(vh/2-ty)/1.25;draw();});
+document.getElementById('zreset').addEventListener('click',()=>{fitAll();draw();});
+
+// Init
+const ro=new ResizeObserver(()=>{resize();fitAll();draw();});
+ro.observe(wrap);
+setTimeout(()=>{resize();fitAll();draw();},50);
+</script>

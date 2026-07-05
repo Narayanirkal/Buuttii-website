@@ -30,6 +30,7 @@
                 <ul class="navbar-nav ms-auto align-items-center gap-lg-4">
                     <li class="nav-item"><a class="nav-link fw-medium" href="#about">About Us</a></li>
                     <li class="nav-item"><a class="nav-link fw-medium" href="#mission">Our Mission</a></li>
+                    <li class="nav-item"><a class="nav-link fw-medium" href="#quick-orders">Quick Orders</a></li>
                     <li class="nav-item"><a class="nav-link fw-medium" href="#hero">Download App</a></li>
                     <li class="nav-item"><a class="nav-link fw-medium" href="#contact">Contact</a></li>
                     <li class="nav-item">
@@ -60,7 +61,7 @@
                 <div class="col-lg-5">
                     <div class="text-center">
                         <img src="image/app-mockup.png" alt="Buuttii Mobile App"
-                            class="img-fluid app-mockup-img" style="max-height: 450px;">
+                            class="img-fluid app-mockup-img" style="max-height: 550px;">
                     </div>
                     <!-- App Download Links below App Image -->
                     <div class="mt-4 text-center">
@@ -79,7 +80,7 @@
                                 </div>
                             </a>
                             <!-- App Store Badge -->
-                            <a href="#" class="app-badge-btn px-3 py-2" onclick="alert('iOS App is coming soon! Please check back later or use our Android app.'); return false;">
+                            <a href="https://apps.apple.com/us/app/buuttii/id6780753777" target="_blank" class="app-badge-btn px-3 py-2">
                                 <svg class="me-2" viewBox="0 0 384 512" width="20" height="20" fill="#fff" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 47.5-24.4 76.5 26.9 2.4 51.2-16 68.3-38.9z"/>
                                 </svg>
@@ -98,7 +99,8 @@
     <!-- About Section -->
     <section id="about" class="py-5 py-lg-10 bg-light">
         <div class="container">
-            <div class="row align-items-center g-5">
+            <!-- Who is Buuttii -->
+            <div class="row align-items-center g-5 mb-5 pb-lg-4">
                 <div class="col-lg-6 order-2 order-lg-1 text-center">
                     <img src="image/hero-tiffin.png" alt="Buuttii Fresh Tiffin Delivery" class="img-fluid rounded-4 shadow max-width-500 mx-auto d-block">
                 </div>
@@ -115,18 +117,14 @@
                     </p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Tailored Meals Section -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <div class="row align-items-center g-5">
+            <!-- Tailored Meals -->
+            <div class="row align-items-center g-5 mt-5 pt-lg-4">
                 <div class="col-lg-6">
-                    <h2 class="display-4 fw-bold mb-4">Tailored for Every <span class="text-orange">Student</span></h2>
+                    <h2 class="display-4 fw-bold mb-4">Tailored for Every <span class="text-orange">Profile</span></h2>
                     <p class="text-muted fs-5 mb-4">
-                        We understand that a 1st grader and a 12th grader have very different nutritional needs. That's
-                        why Buuttii offers specialized meal sizes designed specifically for every school standard.
+                        We understand that children, teachers, and professionals have very different nutritional needs. That's
+                        why Buuttii offers specialized meal sizes designed specifically for every profile standard.
                     </p>
                     <div class="row g-3 mb-4">
                         <div class="col-sm-4">
@@ -155,7 +153,7 @@
                 <div class="col-lg-6">
                     <div class="p-4 bg-white border rounded-4 shadow-sm mb-4">
                         <h4 class="fw-bold mb-3">Nutritional Dashboard</h4>
-                        <p class="text-muted mb-0">Track your child's daily intake with our detailed nutritional and
+                        <p class="text-muted mb-0">Track your daily intake with our detailed nutritional and
                             vitamin content dashboard. We ensure every meal is balanced for growth and energy.</p>
                     </div>
                     <div class="p-4 bg-white border rounded-4 shadow-sm">
@@ -169,20 +167,41 @@
         </div>
     </section>
 
+    <!-- Quick Orders Section -->
+    <section id="quick-orders" class="py-5 bg-white">
+        <div class="container">
+            <div class="row g-5">
+                <!-- One Day Lunch -->
+                <div class="col-md-6">
+                    <h2 class="display-4 fw-bold mb-4">🍱 One Day Lunch</h2>
+                    <p class="text-muted fs-5">
+                        Craving a single healthy meal today or tomorrow? Perfect for trials or irregular schedules. Order a fresh standard lunch before the daily cutoff with zero subscription commitment, delivered directly to your saved school or workplace address.
+                    </p>
+                </div>
+                <!-- Buuttii Specials -->
+                <div class="col-md-6">
+                    <h2 class="display-4 fw-bold mb-4">✨ Buuttii Specials</h2>
+                    <p class="text-muted fs-5">
+                        Indulge in our curated menu of special delicacies, traditional sweets, and festive items. Easily add items to your specials cart and customize quantities, delivered fresh directly alongside your standard route delivery.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Bulk Orders Section -->
     <section class="py-5 bg-white">
         <div class="container">
             <div class="row align-items-center g-5">
-                <div class="col-lg-7">
+                <div class="col-lg-6">
                     <h2 class="display-4 fw-bold mb-4">Bulk Orders & <span class="text-orange">Gatherings</span></h2>
-                    <p class="text-muted fs-5 mb-5">
+                    <p class="text-muted fs-5 mb-4">
                         Beyond daily subscriptions, Buuttii provides reliable bulk meal solutions for large groups and special gatherings. We ensure consistent quality and professional service for every order, regardless of size.
                     </p>
                     <a href="#contact" class="btn btn-orange btn-lg px-5 py-3 fw-bold rounded-3">Enquire for Bulk Orders</a>
                 </div>
-                <div class="col-lg-5">
-                    <img src="image/about-tiffin.png" alt="Buuttii Catering Tiffins" class="img-fluid rounded-4 shadow mb-4 mx-auto d-block">
-                    <div class="p-4 bg-light border rounded-4 shadow-sm">
+                <div class="col-lg-6">
+                    <div class="p-4 p-lg-5 bg-light border rounded-4">
                         <h4 class="fw-bold mb-3">Scale with Confidence</h4>
                         <p class="text-muted mb-0">From small team lunches to large community gatherings, we deliver professional-grade nutrition with the same care and quality as our daily subscription service.</p>
                     </div>

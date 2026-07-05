@@ -21,87 +21,6 @@
             background: linear-gradient(135deg, #111111 0%, #222222 100%);
             border-bottom: 4px solid var(--orange);
         }
-
-        .legal-content h2 {
-            font-weight: 700;
-            color: var(--primary);
-            border-left: 4px solid var(--orange);
-            padding-left: 15px;
-            margin-top: 3rem;
-            margin-bottom: 1.25rem;
-            font-size: 1.75rem;
-            scroll-margin-top: 100px;
-            /* offset for sticky navbar */
-        }
-
-        .legal-content h2:first-of-type {
-            margin-top: 0;
-        }
-
-        .legal-content p {
-            color: #555;
-            line-height: 1.8;
-            font-size: 1.05rem;
-            margin-bottom: 1.5rem;
-            text-align: justify;
-        }
-
-        .toc-card {
-            position: sticky;
-            top: 100px;
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 1.25rem;
-            padding: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .toc-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .toc-link {
-            display: block;
-            color: #666;
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-            font-weight: 500;
-            font-size: 0.9rem;
-            margin-bottom: 4px;
-            line-height: 1.4;
-        }
-
-        .toc-link:hover {
-            background-color: rgba(255, 77, 0, 0.05);
-            color: var(--orange);
-            padding-left: 18px;
-        }
-
-        .toc-link.active {
-            background-color: var(--orange);
-            color: #fff !important;
-            padding-left: 18px;
-        }
-
-        @media (max-width: 991.98px) {
-            .toc-card {
-                position: relative;
-                top: 0;
-                margin-bottom: 3rem;
-                max-height: none;
-            }
-        }
     </style>
 </head>
 
@@ -138,7 +57,7 @@
     </header>
 
     <!-- Content Section -->
-    <main class="py-5 bg-light">
+    <main class="py-5 bg-white">
         <div class="container">
             <div class="row g-5">
                 <!-- Sidebar TOC -->
@@ -162,142 +81,175 @@
 
                 <!-- Legal Text -->
                 <article class="col-lg-8">
-                    <div class="p-4 p-md-5 bg-white border rounded-4 shadow-sm legal-content">
-                        <p class="lead text-muted fs-5 mb-5">
-                            These Terms of Use govern access to and use of the Buuttii platform, including its mobile
-                            applications, websites, APIs, communication channels, subscription systems, and related
-                            services. By accessing or using the Platform, users agree to be bound by these Terms. Users
-                            who do not agree with these Terms must discontinue use of the Platform immediately.
-                        </p>
+                    <div class="legal-document-wrapper legal-document">
+                        <!-- Intro -->
+                        <div class="legal-section">
+                            <p class="lead text-muted fs-5 mb-0">
+                                These Terms of Use govern access to and use of the Buuttii platform, including its mobile
+                                applications, websites, APIs, communication channels, subscription systems, and related
+                                services. By accessing or using the Platform, users agree to be bound by these Terms. Users
+                                who do not agree with these Terms must discontinue use of the Platform immediately.
+                            </p>
+                        </div>
 
-                        <h2 id="services">Services</h2>
-                        <p>
-                            Buuttii provides digital services related to meal ordering, food delivery, meal
-                            subscriptions, account management, customer support, online payments, and communication
-                            services. The Company reserves the right to modify, suspend, restrict, or discontinue any
-                            part of the Platform or services at its sole discretion without prior notice.
-                        </p>
+                        <!-- Services -->
+                        <div class="legal-section" id="services">
+                            <h2>Services</h2>
+                            <p>
+                                Buuttii provides digital services related to meal ordering, food delivery, meal
+                                subscriptions, account management, customer support, online payments, and communication
+                                services. The Company reserves the right to modify, suspend, restrict, or discontinue any
+                                part of the Platform or services at its sole discretion without prior notice.
+                            </p>
+                        </div>
 
-                        <h2 id="eligibility">User Eligibility and Account Responsibility</h2>
-                        <p>
-                            Users represent that they are legally capable of entering into binding agreements under
-                            applicable law. Users agree to provide accurate, current, and complete information while
-                            using the Platform and are responsible for maintaining the confidentiality of their account
-                            credentials.
-                        </p>
-                        <p>
-                            All activities conducted through a user account shall be deemed the responsibility of the
-                            account holder. Users must immediately notify the Company in case of unauthorized access or
-                            suspected security breaches involving their account.
-                        </p>
+                        <!-- Eligibility -->
+                        <div class="legal-section" id="eligibility">
+                            <h2>User Eligibility and Account Responsibility</h2>
+                            <p>
+                                Users represent that they are legally capable of entering into binding agreements under
+                                applicable law. Users agree to provide accurate, current, and complete information while
+                                using the Platform and are responsible for maintaining the confidentiality of their account
+                                credentials.
+                            </p>
+                            <p>
+                                All activities conducted through a user account shall be deemed the responsibility of the
+                                account holder. Users must immediately notify the Company in case of unauthorized access or
+                                suspected security breaches involving their account.
+                            </p>
+                        </div>
 
-                        <h2 id="acceptable">Acceptable Use</h2>
-                        <p>
-                            Users agree not to misuse the Platform or engage in activities that may interfere with
-                            platform operations, compromise security, violate applicable laws, infringe intellectual
-                            property rights, abuse subscription systems, submit false information, attempt unauthorized
-                            access, distribute malicious software, or disrupt infrastructure or APIs.
-                        </p>
-                        <p>
-                            The Company reserves the right to investigate violations and take appropriate action
-                            including account suspension, service restriction, legal proceedings, or permanent
-                            termination.
-                        </p>
+                        <!-- Acceptable Use -->
+                        <div class="legal-section" id="acceptable">
+                            <h2>Acceptable Use</h2>
+                            <p>
+                                Users agree not to misuse the Platform or engage in activities that may interfere with
+                                platform operations, compromise security, violate applicable laws, infringe intellectual
+                                property rights, abuse subscription systems, submit false information, attempt unauthorized
+                                access, distribute malicious software, or disrupt infrastructure or APIs.
+                            </p>
+                            <p>
+                                The Company reserves the right to investigate violations and take appropriate action
+                                including account suspension, service restriction, legal proceedings, or permanent
+                                termination.
+                            </p>
+                        </div>
 
-                        <h2 id="orders">Orders, Deliveries, and Subscriptions</h2>
-                        <p>
-                            Orders placed through the Platform are subject to acceptance, operational feasibility,
-                            service availability, and payment confirmation. The Company reserves the right to reject,
-                            cancel, or modify orders due to pricing errors, suspected fraud, technical failures,
-                            operational limitations, stock unavailability, or other legitimate reasons.
-                        </p>
-                        <p>
-                            Delivery timelines displayed on the Platform are estimates only and may vary due to weather
-                            conditions, traffic, operational delays, demand fluctuations, technical interruptions, or
-                            external circumstances beyond reasonable control. The Company does not guarantee
-                            uninterrupted or exact delivery timings.
-                        </p>
-                        <p>
-                            Users are responsible for providing accurate delivery details and ensuring availability at
-                            the delivery location. Additional costs or delays arising from inaccurate information may be
-                            charged to the user where applicable.
-                        </p>
-                        <p>
-                            Subscription services offered through the Platform may involve recurring billing cycles,
-                            automatic renewals, scheduled deliveries, or plan-based pricing structures. Subscription
-                            pricing, features, availability, and benefits may change from time to time. Certain
-                            subscription payments may be non-refundable after service activation or meal preparation has
-                            commenced.
-                        </p>
+                        <!-- Orders -->
+                        <div class="legal-section" id="orders">
+                            <h2>Orders, Deliveries, and Subscriptions</h2>
+                            <p>
+                                Orders placed through the Platform are subject to acceptance, operational feasibility,
+                                service availability, and payment confirmation. The Company reserves the right to reject,
+                                cancel, or modify orders due to pricing errors, suspected fraud, technical failures,
+                                operational limitations, stock unavailability, or other legitimate reasons.
+                            </p>
+                            <p>
+                                Delivery timelines displayed on the Platform are estimates only and may vary due to weather
+                                conditions, traffic, operational delays, demand fluctuations, technical interruptions, or
+                                external circumstances beyond reasonable control. The Company does not guarantee
+                                uninterrupted or exact delivery timings.
+                            </p>
+                            <p>
+                                Users are responsible for providing accurate delivery details and ensuring availability at
+                                the delivery location. Additional costs or delays arising from inaccurate information may be
+                                charged to the user where applicable.
+                            </p>
+                            <p>
+                                Subscription services offered through the Platform may involve recurring billing cycles,
+                                automatic renewals, scheduled deliveries, or plan-based pricing structures. Subscription
+                                pricing, features, availability, and benefits may change from time to time. Certain
+                                subscription payments may be non-refundable after service activation or meal preparation has
+                                commenced.
+                            </p>
+                        </div>
 
-                        <h2 id="payments">Payments and Refunds</h2>
-                        <p>
-                            Users agree to pay all applicable fees, charges, taxes, and subscription amounts associated
-                            with services purchased through the Platform. Payments are processed using authorized
-                            third-party financial service providers.
-                        </p>
-                        <p>
-                            Refunds, where applicable, shall be processed according to operational verification,
-                            cancellation status, duplicate transaction confirmation, payment failures, or
-                            service-related issues. The Company reserves the right to refuse refund requests involving
-                            fraudulent activity, policy abuse, or misuse of promotional systems.
-                        </p>
-                        <p>
-                            Refund processing timelines may vary depending on payment providers, banks, or financial
-                            institutions.
-                        </p>
+                        <!-- Payments -->
+                        <div class="legal-section" id="payments">
+                            <h2>Payments and Refunds</h2>
+                            <p>
+                                Users agree to pay all applicable fees, charges, taxes, and subscription amounts associated
+                                with services purchased through the Platform. Payments are processed using authorized
+                                third-party financial service providers.
+                            </p>
+                            <p>
+                                Refunds, where applicable, shall be processed according to operational verification,
+                                cancellation status, duplicate transaction confirmation, payment failures, or
+                                service-related issues. The Company reserves the right to refuse refund requests involving
+                                fraudulent activity, policy abuse, or misuse of promotional systems.
+                            </p>
+                            <p>
+                                Refund processing timelines may vary depending on payment providers, banks, or financial
+                                institutions.
+                            </p>
+                        </div>
 
-                        <h2 id="intellectual">Intellectual Property</h2>
-                        <p>
-                            All rights, title, and interest relating to the Platform, including software, source code,
-                            APIs, trademarks, logos, branding elements, interface designs, databases, text, graphics,
-                            operational workflows, and proprietary systems, remain the exclusive property of Buuttii or
-                            its licensors.
-                        </p>
-                        <p>
-                            Users may not reproduce, modify, distribute, reverse engineer, scrape, copy, or commercially
-                            exploit any part of the Platform without prior written authorization.
-                        </p>
+                        <!-- Intellectual Property -->
+                        <div class="legal-section" id="intellectual">
+                            <h2>Intellectual Property</h2>
+                            <p>
+                                All rights, title, and interest relating to the Platform, including software, source code,
+                                APIs, trademarks, logos, branding elements, interface designs, databases, text, graphics,
+                                operational workflows, and proprietary systems, remain the exclusive property of Buuttii or
+                                its licensors.
+                            </p>
+                            <p>
+                                Users may not reproduce, modify, distribute, reverse engineer, scrape, copy, or commercially
+                                exploit any part of the Platform without prior written authorization.
+                            </p>
+                        </div>
 
-                        <h2 id="availability">Platform Availability and Limitation of Liability</h2>
-                        <p>
-                            The Platform is provided on an “as is” and “as available” basis without warranties of any
-                            kind, whether express or implied. While reasonable efforts are made to maintain service
-                            availability and accuracy, the Company does not guarantee uninterrupted operation,
-                            error-free functionality, or complete reliability.
-                        </p>
-                        <p>
-                            To the maximum extent permitted by applicable law, the Company shall not be liable for
-                            indirect, incidental, consequential, punitive, or special damages arising from use of the
-                            Platform, including but not limited to delivery delays, payment failures, service
-                            interruptions, third-party outages, data loss, operational downtime, or unauthorized account
-                            access caused by user negligence.
-                        </p>
+                        <!-- Platform Availability -->
+                        <div class="legal-section" id="availability">
+                            <h2>Platform Availability and Limitation of Liability</h2>
+                            <p>
+                                The Platform is provided on an “as is” and “as available” basis without warranties of any
+                                kind, whether express or implied. While reasonable efforts are made to maintain service
+                                availability and accuracy, the Company does not guarantee uninterrupted operation,
+                                error-free functionality, or complete reliability.
+                            </p>
+                            <p>
+                                To the maximum extent permitted by applicable law, the Company shall not be liable for
+                                indirect, incidental, consequential, punitive, or special damages arising from use of the
+                                Platform, including but not limited to delivery delays, payment failures, service
+                                interruptions, third-party outages, data loss, operational downtime, or unauthorized account
+                                access caused by user negligence.
+                            </p>
+                        </div>
 
-                        <h2 id="suspension">Suspension and Termination</h2>
-                        <p>
-                            The Company reserves the right to suspend, restrict, or terminate user accounts without
-                            prior notice where users violate these Terms, engage in fraudulent activity, abuse platform
-                            systems, threaten operational security, misuse services, or engage in unlawful conduct.
-                        </p>
-                        <p>
-                            Termination of access does not waive outstanding obligations, payment liabilities, or legal
-                            rights available to the Company.
-                        </p>
+                        <!-- Suspension -->
+                        <div class="legal-section" id="suspension">
+                            <h2>Suspension and Termination</h2>
+                            <p>
+                                The Company reserves the right to suspend, restrict, or terminate user accounts without
+                                prior notice where users violate these Terms, engage in fraudulent activity, abuse platform
+                                systems, threaten operational security, misuse services, or engage in unlawful conduct.
+                            </p>
+                            <p>
+                                Termination of access does not waive outstanding obligations, payment liabilities, or legal
+                                rights available to the Company.
+                            </p>
+                        </div>
 
-                        <h2 id="governing">Governing Law and Jurisdiction</h2>
-                        <p>
-                            These Terms shall be governed by and interpreted in accordance with the laws of India. Any
-                            disputes arising out of or relating to these Terms or the use of the Platform shall be
-                            subject to the exclusive jurisdiction of competent courts located in India.
-                        </p>
+                        <!-- Governing Law -->
+                        <div class="legal-section" id="governing">
+                            <h2>Governing Law and Jurisdiction</h2>
+                            <p>
+                                These Terms shall be governed by and interpreted in accordance with the laws of India. Any
+                                disputes arising out of or relating to these Terms or the use of the Platform shall be
+                                subject to the exclusive jurisdiction of competent courts located in India.
+                            </p>
+                        </div>
 
-                        <h2 id="changes">Changes to Terms</h2>
-                        <p>
-                            The Company reserves the right to revise or update these Terms at any time. Updated Terms
-                            become effective immediately upon publication on the Platform. Continued use of the Platform
-                            following such updates constitutes acceptance of the revised Terms.
-                        </p>
+                        <!-- Changes to Terms -->
+                        <div class="legal-section" id="changes">
+                            <h2>Changes to Terms</h2>
+                            <p>
+                                The Company reserves the right to revise or update these Terms at any time. Updated Terms
+                                become effective immediately upon publication on the Platform. Continued use of the Platform
+                                following such updates constitutes acceptance of the revised Terms.
+                            </p>
+                        </div>
                     </div>
                 </article>
             </div>
@@ -332,7 +284,7 @@
     <!-- Smooth highlighting Scrollspy JS -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('.legal-content h2');
+            const sections = document.querySelectorAll('.legal-section[id]');
             const navLinks = document.querySelectorAll('.toc-link');
 
             function changeActiveLink() {

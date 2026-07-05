@@ -32,7 +32,8 @@ body {
     .max-width-500 { max-width: 500px; }
     .max-width-300 { max-width: 300px; }
 }
-.py-lg-10 { padding-top: 5rem !important; padding-bottom: 5rem !important; }
+.py-lg-10 { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
+.py-5 { padding-top: 1.5rem !important; padding-bottom: 1.5rem !important; }
 .rounded-4 { border-radius: 1.5rem !important; }
 
 /* Custom Buttons */
@@ -121,8 +122,8 @@ body {
         padding-bottom: 3rem !important;
     }
     .py-lg-10 {
-        padding-top: 3rem !important;
-        padding-bottom: 3rem !important;
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
     }
     .hero-img-wrapper { 
         margin-top: 1rem; 
@@ -237,7 +238,7 @@ body {
 }
 
 .app-mockup-img:hover {
-    transform: scale(1.03) rotate(-1deg);
+    transform: scale(1.03);
 }
 
 @media (max-width: 991.98px) {
@@ -248,4 +249,147 @@ body {
         margin: 0.5rem;
     }
 }
+
+/* Quick Order Cards Styling */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Unified Legal Document Layout Styles (Flat & Cardless) */
+.legal-document-wrapper {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+}
+
+@media (max-width: 767.98px) {
+    .legal-document-wrapper {
+        padding: 0;
+    }
+}
+
+.legal-section {
+    margin-bottom: 3.5rem;
+    scroll-margin-top: 100px; /* Offset for sticky nav */
+}
+
+.legal-section:last-of-type {
+    margin-bottom: 0;
+}
+
+.legal-document h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+}
+
+.legal-document h2::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 50px;
+    height: 1px;
+    background-color: var(--orange);
+}
+
+.legal-document h2:first-of-type {
+    margin-top: 0;
+}
+
+.legal-document p, 
+.legal-document li {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #495057;
+    margin-bottom: 1.25rem;
+}
+
+.legal-document ul, 
+.legal-document ol {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+}
+
+.legal-document li {
+    margin-bottom: 0.5rem;
+}
+
+.legal-document strong {
+    color: var(--primary);
+}
+
+/* Table of Contents Sidebar Styling (Flat & Borderless) */
+.toc-card {
+    position: sticky;
+    top: 100px;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.toc-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.toc-link {
+    display: block;
+    color: #6c757d;
+    text-decoration: none;
+    padding: 6px 0;
+    transition: all 0.25s ease;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    line-height: 1.4;
+    border-left: 2px solid transparent;
+    padding-left: 12px;
+}
+
+.toc-link:hover {
+    color: var(--orange);
+    padding-left: 16px;
+    border-left-color: rgba(255, 77, 0, 0.3);
+}
+
+.toc-link.active {
+    color: var(--orange) !important;
+    font-weight: 700;
+    padding-left: 16px;
+    border-left-color: var(--orange);
+    background-color: transparent !important;
+}
+
+@media (max-width: 991.98px) {
+    .toc-card {
+        position: relative;
+        top: 0;
+        margin-bottom: 2.5rem;
+        max-height: none;
+    }
+}
+
 

@@ -15,110 +15,6 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="image/logo.png">
     
-    <style>
-        /* Legal Page Custom CSS */
-        .page-header-bg {
-            background: linear-gradient(135deg, #111111 0%, #222222 100%);
-            border-bottom: 4px solid var(--orange);
-        }
-        
-        .legal-section-card {
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 1.25rem;
-            padding: 2.25rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.015);
-            scroll-margin-top: 100px; /* offset for sticky navbar */
-            transition: transform 0.3s cubic-bezier(0.2, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.2, 1, 0.3, 1);
-        }
-        
-        .legal-section-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
-            border-color: rgba(255, 77, 0, 0.2);
-        }
-        
-        .legal-section-card h2 {
-            font-weight: 700;
-            color: var(--primary);
-            border-left: 4px solid var(--orange);
-            padding-left: 15px;
-            margin-top: 0;
-            margin-bottom: 1.25rem;
-            font-size: 1.6rem;
-        }
-        
-        .legal-section-card p,
-        .legal-section-card li {
-            color: #555;
-            line-height: 1.8;
-            font-size: 1.05rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .legal-section-card p:last-child,
-        .legal-section-card li:last-child {
-            margin-bottom: 0;
-        }
-        
-        .toc-card {
-            position: sticky;
-            top: 100px;
-            background: #fff;
-            border: 1px solid var(--border);
-            border-radius: 1.25rem;
-            padding: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-        
-        .toc-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border);
-        }
-        
-        .toc-link {
-            display: block;
-            color: #666;
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-            font-weight: 500;
-            font-size: 0.9rem;
-            margin-bottom: 4px;
-            line-height: 1.4;
-        }
-        
-        .toc-link:hover {
-            background-color: rgba(255, 77, 0, 0.05);
-            color: var(--orange);
-            padding-left: 18px;
-        }
-        
-        .toc-link.active {
-            background-color: var(--orange);
-            color: #fff !important;
-            padding-left: 18px;
-        }
-        
-        @media (max-width: 991.98px) {
-            .toc-card {
-                position: relative;
-                top: 0;
-                margin-bottom: 3rem;
-                max-height: none;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -154,7 +50,7 @@
     </header>
 
     <!-- Content Section -->
-    <main class="py-5 bg-light">
+    <main class="legal-main py-5 bg-white">
         <div class="container">
             <div class="row g-5">
                 <!-- Sidebar TOC -->
@@ -180,134 +76,136 @@
 
                 <!-- Legal Text -->
                 <article class="col-lg-8">
-                    <!-- Intro Card -->
-                    <div class="legal-section-card">
-                        <p class="lead text-muted fs-5 mb-4">
-                            Buuttii values the privacy of its users and is committed to protecting personal information collected through our mobile application, website, APIs, WhatsApp communication channels, administrative systems, and related services (collectively referred to as the “Platform”). This Privacy Policy explains how information is collected, used, stored, processed, disclosed, and protected when users access or use our services.
-                        </p>
-                        <p class="text-muted mb-0">
-                            By accessing or using the Platform, users acknowledge that they have read, understood, and agreed to the practices described in this Privacy Policy.
-                        </p>
-                    </div>
+                    <div class="legal-document-wrapper legal-document">
+                        <!-- Intro -->
+                        <div class="legal-section">
+                            <p class="lead text-muted fs-5 mb-4">
+                                Buuttii values the privacy of its users and is committed to protecting personal information collected through our mobile application, website, APIs, WhatsApp communication channels, administrative systems, and related services (collectively referred to as the “Platform”). This Privacy Policy explains how information is collected, used, stored, processed, disclosed, and protected when users access or use our services.
+                            </p>
+                            <p class="text-muted mb-0">
+                                By accessing or using the Platform, users acknowledge that they have read, understood, and agreed to the practices described in this Privacy Policy.
+                            </p>
+                        </div>
 
-                    <!-- Information We Collect -->
-                    <div id="info-collect" class="legal-section-card">
-                        <h2>Information We Collect</h2>
-                        <p>
-                            In order to provide meal delivery, subscription management, customer support, payment processing, and operational services, we may collect certain personal and technical information from users. The information collected may include a user’s name, mobile number, email address, delivery address, account credentials, order history, subscription details, dietary preferences, feedback, communication history, and transaction-related information.
-                        </p>
-                        <p>
-                            We may also collect technical and device-related information automatically, including IP address, browser type, operating system, device identifiers, application version, session activity, crash reports, usage analytics, and network-related information. This information is collected to improve platform performance, enhance security, analyze usage patterns, and maintain operational stability.
-                        </p>
-                        <p>
-                            Where required for delivery and service optimization, we may collect location information to identify delivery addresses, improve delivery accuracy, assign nearby delivery personnel, and prevent fraudulent activities. Users may disable location permissions through device settings; however, certain services or features may not function properly as a result.
-                        </p>
-                    </div>
+                        <!-- Information We Collect -->
+                        <div class="legal-section" id="info-collect">
+                            <h2>Information We Collect</h2>
+                            <p>
+                                In order to provide meal delivery, subscription management, customer support, payment processing, and operational services, we may collect certain personal and technical information from users. The information collected may include a user’s name, mobile number, email address, delivery address, account credentials, order history, subscription details, dietary preferences, feedback, communication history, and transaction-related information.
+                            </p>
+                            <p>
+                                We may also collect technical and device-related information automatically, including IP address, browser type, operating system, device identifiers, application version, session activity, crash reports, usage analytics, and network-related information. This information is collected to improve platform performance, enhance security, analyze usage patterns, and maintain operational stability.
+                            </p>
+                            <p>
+                                Where required for delivery and service optimization, we may collect location information to identify delivery addresses, improve delivery accuracy, assign nearby delivery personnel, and prevent fraudulent activities. Users may disable location permissions through device settings; however, certain services or features may not function properly as a result.
+                            </p>
+                        </div>
 
-                    <!-- How We Use Information -->
-                    <div id="how-use" class="legal-section-card">
-                        <h2>How We Use Information</h2>
-                        <p>
-                            The information collected through the Platform is used for legitimate business and operational purposes. This includes creating and managing user accounts, processing orders and subscriptions, delivering meals, processing payments and refunds, providing customer support, sending notifications, improving service quality, monitoring platform security, detecting fraudulent activity, maintaining operational records, and complying with applicable legal obligations.
-                        </p>
-                        <p>
-                            We may also use aggregated or anonymized data for analytics, business intelligence, service improvement, research, and operational optimization.
-                        </p>
-                    </div>
+                        <!-- How We Use Information -->
+                        <div class="legal-section" id="how-use">
+                            <h2>How We Use Information</h2>
+                            <p>
+                                The information collected through the Platform is used for legitimate business and operational purposes. This includes creating and managing user accounts, processing orders and subscriptions, delivering meals, processing payments and refunds, providing customer support, sending notifications, improving service quality, monitoring platform security, detecting fraudulent activity, maintaining operational records, and complying with applicable legal obligations.
+                            </p>
+                            <p>
+                                We may also use aggregated or anonymized data for analytics, business intelligence, service improvement, research, and operational optimization.
+                            </p>
+                        </div>
 
-                    <!-- Payments & Financial Info -->
-                    <div id="payments" class="legal-section-card">
-                        <h2>Payments and Financial Information</h2>
-                        <p>
-                            Payments made through the Platform may be processed using third-party payment gateways, UPI providers, banks, or financial service providers. While transaction-related information such as payment status, billing references, subscription history, and refund details may be stored for operational and accounting purposes, sensitive financial information such as complete debit card, credit card, or banking credentials is generally processed directly by authorized payment service providers and is not intentionally stored on our servers unless required for compliance or secure transaction processing.
-                        </p>
-                    </div>
+                        <!-- Payments & Financial Info -->
+                        <div class="legal-section" id="payments">
+                            <h2>Payments and Financial Information</h2>
+                            <p>
+                                Payments made through the Platform may be processed using third-party payment gateways, UPI providers, banks, or financial service providers. While transaction-related information such as payment status, billing references, subscription history, and refund details may be stored for operational and accounting purposes, sensitive financial information such as complete debit card, credit card, or banking credentials is generally processed directly by authorized payment service providers and is not intentionally stored on our servers unless required for compliance or secure transaction processing.
+                            </p>
+                        </div>
 
-                    <!-- Communication Services -->
-                    <div id="communication" class="legal-section-card">
-                        <h2>Communication Services</h2>
-                        <p>
-                            The Platform may use communication services such as WhatsApp Business APIs, SMS gateways, email systems, and push notifications to communicate with users. By using the Platform, users consent to receiving communications related to account authentication, OTP verification, order confirmations, delivery updates, subscription reminders, support interactions, policy updates, and other service-related notifications.
-                        </p>
-                        <p>
-                            Promotional or marketing communication may be sent where permitted by law, and users may opt out of such communication where applicable.
-                        </p>
-                    </div>
+                        <!-- Communication Services -->
+                        <div class="legal-section" id="communication">
+                            <h2>Communication Services</h2>
+                            <p>
+                                The Platform may use communication services such as WhatsApp Business APIs, SMS gateways, email systems, and push notifications to communicate with users. By using the Platform, users consent to receiving communications related to account authentication, OTP verification, order confirmations, delivery updates, subscription reminders, support interactions, policy updates, and other service-related notifications.
+                            </p>
+                            <p>
+                                Promotional or marketing communication may be sent where permitted by law, and users may opt out of such communication where applicable.
+                            </p>
+                        </div>
 
-                    <!-- Disclosure of Information -->
-                    <div id="disclosure" class="legal-section-card">
-                        <h2>Disclosure of Information</h2>
-                        <p>
-                            We do not sell or rent personal information to third parties. However, information may be shared with trusted service providers, contractors, operational partners, and affiliated entities where necessary for service delivery, payment processing, analytics, infrastructure hosting, authentication, messaging services, customer support, or delivery operations.
-                        </p>
-                        <p>
-                            Limited user information necessary for successful order fulfillment, such as customer name, delivery address, contact number, and order details, may be shared with authorized delivery personnel.
-                        </p>
-                        <p>
-                            Information may also be disclosed where required by law, regulation, legal process, court order, governmental request, fraud investigation, or where disclosure is reasonably necessary to protect the rights, property, security, or operations of the Company, users, or the public.
-                        </p>
-                        <p>
-                            In the event of a merger, acquisition, restructuring, investment, asset sale, or business transfer, user information may form part of the transferred assets subject to applicable legal obligations.
-                        </p>
-                    </div>
+                        <!-- Disclosure of Information -->
+                        <div class="legal-section" id="disclosure">
+                            <h2>Disclosure of Information</h2>
+                            <p>
+                                We do not sell or rent personal information to third parties. However, information may be shared with trusted service providers, contractors, operational partners, and affiliated entities where necessary for service delivery, payment processing, analytics, infrastructure hosting, authentication, messaging services, customer support, or delivery operations.
+                            </p>
+                            <p>
+                                Limited user information necessary for successful order fulfillment, such as customer name, delivery address, contact number, and order details, may be shared with authorized delivery personnel.
+                            </p>
+                            <p>
+                                Information may also be disclosed where required by law, regulation, legal process, court order, governmental request, fraud investigation, or where disclosure is reasonably necessary to protect the rights, property, security, or operations of the Company, users, or the public.
+                            </p>
+                            <p>
+                                In the event of a merger, acquisition, restructuring, investment, asset sale, or business transfer, user information may form part of the transferred assets subject to applicable legal obligations.
+                            </p>
+                        </div>
 
-                    <!-- Data Security -->
-                    <div id="security" class="legal-section-card">
-                        <h2>Data Security</h2>
-                        <p>
-                            We implement commercially reasonable technical, administrative, and organizational measures to protect personal information against unauthorized access, misuse, loss, disclosure, alteration, or destruction. Such measures may include encrypted communication protocols, access control systems, authentication mechanisms, password hashing, infrastructure monitoring, secure database management, logging systems, and security auditing practices.
-                        </p>
-                        <p>
-                            Despite reasonable safeguards, no electronic system or internet-based service can guarantee absolute security. Users are responsible for maintaining the confidentiality of their account credentials and for securing access to their devices.
-                        </p>
-                    </div>
+                        <!-- Data Security -->
+                        <div class="legal-section" id="security">
+                            <h2>Data Security</h2>
+                            <p>
+                                We implement commercially reasonable technical, administrative, and organizational measures to protect personal information against unauthorized access, misuse, loss, disclosure, alteration, or destruction. Such measures may include encrypted communication protocols, access control systems, authentication mechanisms, password hashing, infrastructure monitoring, secure database management, logging systems, and security auditing practices.
+                            </p>
+                            <p>
+                                Despite reasonable safeguards, no electronic system or internet-based service can guarantee absolute security. Users are responsible for maintaining the confidentiality of their account credentials and for securing access to their devices.
+                            </p>
+                        </div>
 
-                    <!-- Cookies & Tracking -->
-                    <div id="cookies" class="legal-section-card">
-                        <h2>Cookies and Tracking Technologies</h2>
-                        <p>
-                            The Platform may use cookies, local storage, analytics tools, and similar tracking technologies to maintain user sessions, remember preferences, analyze traffic patterns, improve user experience, and optimize platform performance. Users may configure browser settings to refuse or disable cookies; however, certain features or functionalities of the Platform may become unavailable as a result.
-                        </p>
-                    </div>
+                        <!-- Cookies & Tracking -->
+                        <div class="legal-section" id="cookies">
+                            <h2>Cookies and Tracking Technologies</h2>
+                            <p>
+                                The Platform may use cookies, local storage, analytics tools, and similar tracking technologies to maintain user sessions, remember preferences, analyze traffic patterns, improve user experience, and optimize platform performance. Users may configure browser settings to refuse or disable cookies; however, certain features or functionalities of the Platform may become unavailable as a result.
+                            </p>
+                        </div>
 
-                    <!-- Data Retention -->
-                    <div id="retention" class="legal-section-card">
-                        <h2>Data Retention</h2>
-                        <p>
-                            Personal information is retained only for as long as necessary to fulfill operational purposes, comply with legal obligations, resolve disputes, enforce agreements, maintain accounting and financial records, prevent fraud, and protect platform integrity. Certain information may continue to be retained even after account deletion where required by law, regulation, tax obligations, or security purposes.
-                        </p>
-                    </div>
+                        <!-- Data Retention -->
+                        <div class="legal-section" id="retention">
+                            <h2>Data Retention</h2>
+                            <p>
+                                Personal information is retained only for as long as necessary to fulfill operational purposes, comply with legal obligations, resolve disputes, enforce agreements, maintain accounting and financial records, prevent fraud, and protect platform integrity. Certain information may continue to be retained even after account deletion where required by law, regulation, tax obligations, or security purposes.
+                            </p>
+                        </div>
 
-                    <!-- User Rights -->
-                    <div id="rights" class="legal-section-card">
-                        <h2>User Rights</h2>
-                        <p>
-                            Subject to applicable laws, users may request access to their personal information, request correction of inaccurate data, request deletion of their account, or withdraw certain permissions previously granted. Requests may require identity verification and may be subject to legal or operational limitations.
-                        </p>
-                    </div>
+                        <!-- User Rights -->
+                        <div class="legal-section" id="rights">
+                            <h2>User Rights</h2>
+                            <p>
+                                Subject to applicable laws, users may request access to their personal information, request correction of inaccurate data, request deletion of their account, or withdraw certain permissions previously granted. Requests may require identity verification and may be subject to legal or operational limitations.
+                            </p>
+                        </div>
 
-                    <!-- Third-Party Services -->
-                    <div id="third-party" class="legal-section-card">
-                        <h2>Third-Party Services</h2>
-                        <p>
-                            The Platform may integrate with third-party services including payment gateways, cloud infrastructure providers, analytics platforms, geolocation services, notification systems, and WhatsApp Business services. The Company is not responsible for the privacy practices, content, or operations of external third-party services, and users are encouraged to review the policies of such providers independently.
-                        </p>
-                    </div>
+                        <!-- Third-Party Services -->
+                        <div class="legal-section" id="third-party">
+                            <h2>Third-Party Services</h2>
+                            <p>
+                                The Platform may integrate with third-party services including payment gateways, cloud infrastructure providers, analytics platforms, geolocation services, notification systems, and WhatsApp Business services. The Company is not responsible for the privacy practices, content, or operations of external third-party services, and users are encouraged to review the policies of such providers independently.
+                            </p>
+                        </div>
 
-                    <!-- Children's Privacy -->
-                    <div id="children" class="legal-section-card">
-                        <h2>Children's Privacy</h2>
-                        <p>
-                            Because Buuttii provides meal subscription services for school students, we process information regarding children (such as names, school details, and grades) only as provided and authorized by their parents, legal guardians, or educational institutions. We do not knowingly collect personal information directly from children under the age of 13. Parents or guardians can access, review, modify, or request deletion of their child's profile information by contacting us directly.
-                        </p>
-                    </div>
+                        <!-- Children's Privacy -->
+                        <div class="legal-section" id="children">
+                            <h2>Children's Privacy</h2>
+                            <p>
+                                Because Buuttii provides meal subscription services for school students, we process information regarding children (such as names, school details, and grades) only as provided and authorized by their parents, legal guardians, or educational institutions. We do not knowingly collect personal information directly from children under the age of 13. Parents or guardians can access, review, modify, or request deletion of their child's profile information by contacting us directly.
+                            </p>
+                        </div>
 
-                    <!-- Changes to Policy -->
-                    <div id="changes" class="legal-section-card">
-                        <h2>Changes to this Privacy Policy</h2>
-                        <p>
-                            We reserve the right to update, modify, or revise this Privacy Policy at any time to reflect operational, legal, regulatory, or technological changes. Updated versions will become effective upon publication on the Platform. Continued use of the Platform after such changes constitutes acceptance of the revised Privacy Policy.
-                        </p>
+                        <!-- Changes to Policy -->
+                        <div class="legal-section" id="changes">
+                            <h2>Changes to this Privacy Policy</h2>
+                            <p>
+                                We reserve the right to update, modify, or revise this Privacy Policy at any time to reflect operational, legal, regulatory, or technological changes. Updated versions will become effective upon publication on the Platform. Continued use of the Platform after such changes constitutes acceptance of the revised Privacy Policy.
+                            </p>
+                        </div>
                     </div>
                 </article>
             </div>
@@ -337,7 +235,7 @@
     <!-- Smooth highlighting Scrollspy JS -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const sections = document.querySelectorAll('.legal-section-card[id]');
+            const sections = document.querySelectorAll('.legal-section[id]');
             const navLinks = document.querySelectorAll('.toc-link');
 
             function changeActiveLink() {
